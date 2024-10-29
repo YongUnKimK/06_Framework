@@ -2,7 +2,6 @@ package edu.kh.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 // Java 객체 : new 연산자에 의해 Heap 영역에
 //				클래스에 작성된 내용대로 생성된 것 
