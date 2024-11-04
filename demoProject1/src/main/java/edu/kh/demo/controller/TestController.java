@@ -2,6 +2,7 @@ package edu.kh.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 // Java 객체 : new 연산자에 의해 Heap 영역에
 //				클래스에 작성된 내용대로 생성된 것 
@@ -27,6 +28,7 @@ public class TestController {
 	// - GET/POST 가리지 않고 매핑 (속성을 통해서 지정 가능 or 다른 어노테이션을 이용해서 가능)
 	
 	/*
+	@RequestMapping("/hello")
 	@RequestMapping(value="/hello", method=RequestMethod.POST)
 	public String hello() {
 		// 메서드 로직
