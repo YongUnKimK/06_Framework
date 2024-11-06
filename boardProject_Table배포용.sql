@@ -40,9 +40,9 @@ CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
 -- 샘플 회원 데이터 삽입
 INSERT INTO "MEMBER"
 VALUES(SEQ_MEMBER_NO.NEXTVAL, 
-			 'member01@kh.or.kr',
+			 'user01@kh.or.kr',
 			 '암호화된 비밀번호',
-			 '샘플1',
+			 '유저일',
 			 '01012341234',
 			 NULL,
 			 NULL,
@@ -55,7 +55,26 @@ COMMIT;
 
 SELECT * FROM "MEMBER";
 
+------------------------------------비밀번호 세팅 업데이트(평문 pass01!!) -----------------
+
+UPDATE MEMBER
+SET MEMBER_PW = '$2a$10$mQuTt31FyF3uXL2qAkF21eZsPnoQP6zeo9pKCevmsWtGJEOsKtFhu'
+WHERE MEMBER_NO = 1;
+
+COMMIT;
+
+SELECT  MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
+MEMBER_TEL, MEMBER_ADDRESS, PROFILE_IMG, AUTHORITY, TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') ENROLL_DATE
+FROM "MEMBER"
+WHERE MEMBER_EMAIL = 'user01@kh.or.kr'
+AND MEMBER_DEL_FL = 'N';
+
+
+
+-- 비밀번호 세팅 여기까지!!!!!! -----------------------------------------
 -----------------------------------------
+
+
 
 /* 이메일, 인증키 저장 테이블 생성 */
 CREATE TABLE "TB_AUTH_KEY"(
