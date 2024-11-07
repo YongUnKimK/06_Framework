@@ -72,6 +72,12 @@ AND MEMBER_DEL_FL = 'N';
 
 
 -- 비밀번호 세팅 여기까지!!!!!! -----------------------------------------
+
+
+-- 이메일 중복 검사 ( 0이 조회되면 중복 아님 -> 해당 이메일 사용중인 회원 없음 -> 이용 가능 // 1조회시 중복 -> 사용 불가 )
+SELECT COUNT(*) FROM "MEMBER"
+WHERE MEMBER_DEL_FL ='N'
+AND MEMBER_EMAIL = 'user01@kh.or.kr';
 -----------------------------------------
 
 
@@ -93,6 +99,12 @@ CREATE SEQUENCE SEQ_KEY_NO NOCACHE; -- 인증키 구분 번호 시퀀스
 
 
 SELECT * FROM "TB_AUTH_KEY";
+
+	SELECT COUNT(*)
+	FROM "TB_AUTH_KEY"
+	WHERE EMAIL = #{email}
+	AND AUTH_KEY = #{authKey}	;
+
 
 
 ------------------------------------------
