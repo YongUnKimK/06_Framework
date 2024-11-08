@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -163,6 +164,55 @@ public class MemberController {
 		return service.checkEmail(memberEmail); // 0 or 1
 	}
 	
+	/** 닉네임 중복 검사
+	 * @param memberNickname
+	 * @return 중복 1, 아니면 0 
+	 */
+	@ResponseBody
+	@GetMapping("checkNickname")
+	public int checkNickname(@RequestParam("memberNickname") String memberNickname) {
+		
+		return service.checkNickname(memberNickname); 
+	}
+	
+	// form태그는 비동기가 아니라 동기식요청
+	/** 회원 가입 
+	 * @param inputMember : 입력된 회원 정보 ( memberEmail, memberPw, memberNickname, memberTel, 
+	 * 												  (memberAddress - 따로 배열로 받아서 처리))
+	 * @param memberAddress : 입력한 주소 input 3개의 값을 배열로 전달 [우편번호, 도로명/지번주소, 상세주소 ] 
+	 * @param ra : 리다이렉트 시 request scope로 데이터 전달하는 객체
+	 * @return
+	 */
+	@PostMapping("signup")
+	public String signup(@ModelAttribute/*생략가능*/ Member inputMember,
+						@RequestParam("memberAddress") String[] memberAddress,
+						RedirectAttributes ra) {
+		
+		//log.debug("inputmember: " + inputMember);
+		
+		// 회원가입 서비스 호출
+		int result = service.signup(inputMember, memberAddress);
+		
+		String path = null;
+		String message = null;
+		
+		if(result > 0) { // 성공
+			
+			message = inputMember.getMemberNickname() + "님의 가입을 환영 합니다~";
+			path = "/"; // 메인페이지로 재요청
+		} else { // 실패
+			
+			message = "회원가입 실패..";
+			path = "signup";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+			
+		return "redirect:"+path; // 성공시 메인페이지로 요청 , 
+		// 실패 시 회원가입페이지로 ( 상대경로 )
+		// 현재 주소 /member/signup ( GET방식 요청 )
+	}
 	
 	
 	

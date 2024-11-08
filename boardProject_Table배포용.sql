@@ -53,7 +53,8 @@ VALUES(SEQ_MEMBER_NO.NEXTVAL,
 
 COMMIT;
 
-SELECT * FROM "MEMBER";
+SELECT * FROM "MEMBER"
+ORDER BY MEMBER_NO ;
 
 ------------------------------------비밀번호 세팅 업데이트(평문 pass01!!) -----------------
 
@@ -106,6 +107,10 @@ SELECT * FROM "TB_AUTH_KEY";
 	AND AUTH_KEY = #{authKey}	;
 
 
+	SELECT COUNT(*)
+	FROM "MEMBER"
+	WHERE MEMBER_DEL_FL = 'N' 
+	AND  MEMBER_NICKNAME = '유저일'	;
 
 ------------------------------------------
 

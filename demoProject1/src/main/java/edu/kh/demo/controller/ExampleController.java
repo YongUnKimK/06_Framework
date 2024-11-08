@@ -17,7 +17,7 @@ public class ExampleController {
 	 *    @DeleteMapping("주소")  :   Delete (삭제) 방식 요청 매핑 (form, a태그 요청 불가)
 	 * 
 	 * 
-	 * */
+	 */
 	
 	/*
 	 * Spring Boot에서는 요청 주소 앞에 "/" 가 없어도

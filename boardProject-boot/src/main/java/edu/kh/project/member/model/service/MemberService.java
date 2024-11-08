@@ -21,5 +21,22 @@ public interface MemberService {
 	 */
 	int checkEmail(String memberEmail);
 
+
+
+	/** 멤버 닉네임 중복검사 서비스
+	 * @param memberNickname
+	 * @return
+	 */
+	int checkNickname(String memberNickname);
+
+
+
+	/** 멤버 회원가입 써삐스
+	 * @param inputMember
+	 * @param memberAddress
+	 * @return result
+	 */
+	int signup(Member inputMember, String[] memberAddress);
+
 	
 }

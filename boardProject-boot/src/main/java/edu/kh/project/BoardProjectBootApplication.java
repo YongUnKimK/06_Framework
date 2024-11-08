@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 
 
-@SpringBootApplication(exclude= {SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude={SecurityAutoConfiguration.class})
 // Spring Security에서 기본 제공하는 로그인 페이지를 이용 안하겠다!
 //	(암호화할때사용)
 public class BoardProjectBootApplication {
