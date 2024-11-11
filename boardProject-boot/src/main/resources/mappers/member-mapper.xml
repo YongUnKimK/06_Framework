@@ -45,10 +45,10 @@
 			 DEFAULT,
 			 DEFAULT	
 			 )
+			 </insert>
 	
 	
 	
 	
-	</insert>
 
 </mapper>
