@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <!-- myPage 전용 CSS -->
   <link rel="stylesheet" href="/css/myPage/myPage-style.css">
 </head>
+
 <body>
 
   <main>
@@ -35,10 +37,9 @@
         <form action="profile" method="POST" name="myPageFrm" id="profile" enctype="multipart/form-data">
           <div class="profile-image-area">
 
-            <img th:with="user=#{user.default.image}"
-                th:src="${session.loginMember.profileImg ?: user}"
-                id="profileImg" >
-              
+            <img th:with="user=#{user.default.image}" th:src="${session.loginMember.profileImg ?: user}"
+              id="profileImg">
+
           </div>
           <span id="deleteImage">x</span>
 
@@ -69,10 +70,11 @@
 
   </main>
 
-   <!-- 푸터 추가 -->
+  <!-- 푸터 추가 -->
   <th:block th:replace="~{common/footer}"></th:block>
-  
+
 
   <script src="/js/myPage/myPage.js"></script>
 </body>
+
 </html>
