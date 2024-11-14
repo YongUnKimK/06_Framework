@@ -257,7 +257,6 @@ COMMENT ON COLUMN "COMMENT"."MEMBER_NO" IS '회원 번호(PK)';
 
 COMMENT ON COLUMN "COMMENT"."PARENT_COMMENT_NO" IS '부모 댓글 번호';
 
-
 --------------------- PK -----------------------
 
 ALTER TABLE "MEMBER" ADD CONSTRAINT "PK_MEMBER" PRIMARY KEY (
@@ -389,13 +388,16 @@ INSERT INTO "BOARD_TYPE" VALUES(SEQ_BOARD_CODE.NEXTVAL, '자유 게시판');
 
 COMMIT;
 
+SELECT BOARD_CODE "boardCode", BOARD_NAME "boardName" FROM BOARD_TYPE
+ORDER BY BOARD_CODE  ; -- 수행됨
+
 ---------------------------------------------
 /* 게시글 번호 시퀀스 생성 */
 CREATE SEQUENCE SEQ_BOARD_NO NOCACHE;
 
 /* 게시판(BOARD) 테이블 샘플 데이터 삽입(PL/SQL)*/
 SELECT * FROM "MEMBER"; -- 존재하는 회원 중 하나로 진행
-
+SELECT * FROM "BOARD";
 -- DBMS_RANDOM.VALUE(0,3) : 0.0 이상, 3.0 미만의 난수
 -- CEIL( DBMS_RANDOM.VALUE(0,3) ) : 1,2,3 중 하나
 
@@ -408,7 +410,7 @@ BEGIN
 					 SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용 입니다',
 					 DEFAULT, DEFAULT, DEFAULT, DEFAULT,
 					 CEIL( DBMS_RANDOM.VALUE(0,3) ),
-					 1 -- 회원번호
+					 8 -- 회원번호
 		);
 		
 	END LOOP;
@@ -422,7 +424,40 @@ FROM "BOARD"
 GROUP BY BOARD_CODE
 ORDER BY BOARD_CODE;
 
+-- 번호 / 제목[댓글개수] / 작성자 닉네임 / 작성일 / 조회수 / 좋아요개수
 
+SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT , 
+	(SELECT COUNT(*) FROM "COMMENT" C	WHERE C.BOARD_NO = B.BOARD_NO) COMMENT_COUNT, 
+	
+	(SELECT COUNT(*) 
+	FROM "BOARD_LIKE" L	WHERE L.BOARD_NO = B.BOARD_NO ) LIKE_COUNT,	
+	
+	CASE 
+			WHEN SYSDATE - BOARD_WRITE_DATE < 1 / 24 / 60 --초단위
+			THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24 * 60 * 60) || '초 전' 
+			
+			WHEN SYSDATE - BOARD_WRITE_DATE < 1 / 24 -- 분단위
+			THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24 * 60) || '분 전'
+			
+			WHEN SYSDATE - BOARD_WRITE_DATE < 1  -- 시간단위
+			THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24) || '시간 전' 
+			
+			ELSE TO_CHAR(BOARD_WRITE_DATE, 'YYYY-MM-DD')
+	END BOARD_WRITE_DATE
+
+FROM "BOARD" B
+JOIN "MEMBER" USING(MEMBER_NO)
+WHERE BOARD_DEL_FL = 'N'
+ORDER BY BOARD_NO DESC;
+
+-- 특정 개시글의 댓글 개수 조회
+SELECT COUNT(*) FROM "COMMENT"
+WHERE BOARD_NO = 200;
+
+-- 현재 시간 - 하루 전
+SELECT SYSDATE 
+	- TO_DATE('2024-11-13 11:19:20', 'YYYY-MM-DD HH24:MI:SS')
+	FROM DUAL;
 
 ---------------------------------------------------
 -- 부모 댓글 번호 NULL 허용
@@ -444,7 +479,7 @@ BEGIN
 			SEQ_COMMENT_NO.CURRVAL || '번째 댓글 입니다',
 			DEFAULT, DEFAULT,
 			CEIL( DBMS_RANDOM.VALUE(0, 2000) ),
-			2,
+			4,
 			NULL
 		);
 	END LOOP;
@@ -520,6 +555,7 @@ BEGIN
 	RETURN IMG_NO;
 END;
 -- 여기까지 긁기
+
 
 
 
