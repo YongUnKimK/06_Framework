@@ -6,7 +6,7 @@
  		xml 파일에 작성된 태그 중 메서드명과 같은 id를 가진 SQL 구문 수행 
   -->
 	
-	
+	<!--  회원 정보 수정 -->
 	<update id="updateInfo">
 		UPDATE "MEMBER" SET
 		MEMBER_NICKNAME = #{memberNickname},

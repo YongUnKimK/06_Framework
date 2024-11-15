@@ -1,5 +1,7 @@
 package edu.kh.project.member.model.dto;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

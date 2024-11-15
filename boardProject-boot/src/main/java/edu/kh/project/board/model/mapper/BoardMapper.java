@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.project.board.model.dto.Board;
+import edu.kh.project.member.model.dto.Member;
 
 @Mapper
 public interface BoardMapper {
@@ -29,4 +30,13 @@ public interface BoardMapper {
 	 */
 	List<Board> selectBoardList(int boardCode, RowBounds rowBounds);
 
+	/** 게시글 상세 조회
+	 * @param map
+	 * @return
+	 */
+	Board selectOne(Map<String, Integer> map);
+
+	
+
+	
 }

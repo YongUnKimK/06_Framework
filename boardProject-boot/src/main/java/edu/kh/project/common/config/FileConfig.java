@@ -35,14 +35,26 @@ public class FileConfig implements WebMvcConfigurer {
 	@Value("${spring.servlet.multipart.location}")
 	private String location; // C:/uploadFiles/temp/
 	
-	// ------------------------------------------------------------------
+	// ------------------------------------------------------------------	
 	
 	// 프로필 이미지 관련 경로
 	@Value("${my.profile.resource-handler}")
 	private String profileResourceHandler; //myPage/profile/**
 	
-	@Value("${my.profile.resource.location}")
+	@Value("${my.profile.resource-location}")
 	private String profileResourceLocation;  // file:///C:/uploadFiles/profile/
+	
+	//--------------------------------------------------------------------
+	
+	// 게시판 이미지 관련 경로
+	@Value("${my.board.resource-handler}")
+	private String boardResourceHandler; // /images/board/** ( value값)
+	
+	@Value("${my.board.resource-location}")
+	private String boardResourceLocation; // file:///c:/uploadFiles/board/
+	
+	
+	
 	
 	// 요청 주소에 따라
 	// 서버 컴퓨터의 어떤 경로에 접근할지 설정
@@ -62,6 +74,9 @@ public class FileConfig implements WebMvcConfigurer {
 		
 		registry.addResourceHandler(profileResourceHandler)  //myPage/profile/**
 		.addResourceLocations(profileResourceLocation); // file:///C:/uploadFiles/profile/
+		
+		registry.addResourceHandler(boardResourceHandler)
+		.addResourceLocations(boardResourceLocation);
 		
 	}
 	
@@ -101,5 +116,7 @@ public class FileConfig implements WebMvcConfigurer {
 		
 		return multipartResolver ;
 	}
+	
+	
 	
 }

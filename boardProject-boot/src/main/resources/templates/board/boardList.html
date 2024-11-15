@@ -69,7 +69,7 @@
 									<!-- 상세 조회 주소에 cp가 포함된 이유 : 상세 -> 목록으로 돌아올 때 사용 -->
 									
 									
-									<!-- 검색 X ( 전체가 보여지고있는상태 ) -->
+									<!-- 검색 X ( 전체가 보여지고있는상태 )  자리마련안되어있는 CP는 쿼리스트링에 들어감-->
 									<a th:unless="${param.key}"
 									th:href="@{/board/{boardCode}/{boardNo} (boardCode=${boardCode}, boardNo=*{boardNo}, cp=${pagination.currentPage})}"
 									th:text="*{boardTitle}">게시글 제목</a>
