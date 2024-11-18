@@ -133,16 +133,15 @@ selectMemberList.addEventListener("click", () => {
         // index : 현재 접근중인 인덱스
 
         // tr 만들어서 그 안에 td 만들고, append후
-        // tr을 tbody에 append
-
+        // tr을 tbody에 append       
         const keyList = ['memberNo', 'memberEmail', 'memberNickname', 'memberDelFl'];
 
         const tr = document.createElement("tr");
 
         keyList.forEach(key => tr.append(createTd(member[key])));
-
+        
         // tbody 자식으로  tr 추가
-        memberList.append(tr);
+        memberList.appendChild(tr);
       });
     })
 });
@@ -152,12 +151,74 @@ selectMemberList.addEventListener("click", () => {
 
 
 
-
-//비밀번호 초기화
-
+/* 특정 회원 비밀번호 초기화 */
 const resetMemberNo = document.querySelector("#resetMemberNo");
+const resetPw = document.querySelector("#resetPw");
+
+resetPw.addEventListener("click", () => {
+
+	// 입력 받은 회원 번호 얻어오기
+	const inputNo = resetMemberNo.value;
+
+	if (inputNo.trim().length == 0) {
+		alert("회원 번호 입력해주세요");
+		return;
+	}
+
+	fetch("/member/resetPw", {
+		method: "PUT", // PUT : 수정 요청 방식
+		headers: { "Content-Type": "application/json" },
+		body: inputNo
+	})
+		.then(resp => resp.text())
+		.then(result => {
+			// result == 컨트롤러로부터 반환받아 TEXT 로 파싱한 값
+			// "1", "0"
+
+			if (result > 0) {
+				alert("초기화 성공!");
+
+			} else {
+				alert("해당 회원이 존재하지 않습니다 :-(");
+
+			}
+		});
+});
 
 
-// 특정회원 탈퇴 복구
 
+// -------------------------------------------------------
+
+/* 특정 회원 탈퇴 복구 */
+const restorationBtn = document.querySelector("#restorationBtn");
 const restorationMemberNo = document.querySelector("#restorationMemberNo");
+
+
+restorationBtn.addEventListener("click", () => {
+	// 입력 받은 회원 번호 얻어오기
+	const inputNo = restorationMemberNo.value;
+
+	if (inputNo.trim().length == 0) {
+		alert("회원 번호 입력해주세요");
+		return;
+	}
+
+	fetch("/member/restoreMember", {
+		method: "PUT", // PUT : 수정 요청 방식
+		headers: { "Content-Type": "application/json" },
+		body: inputNo
+	})
+		.then(resp => resp.text())
+		.then(result => {
+			// result == 컨트롤러로부터 반환받아 TEXT 로 파싱한 값
+			// "1", "0"
+			
+			if (result > 0) {
+				alert("복구 성공!");
+
+			} else {
+				alert("해당 회원이 존재하지 않습니다 :-(");
+
+			}
+		});
+});

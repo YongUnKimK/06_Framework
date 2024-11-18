@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -189,7 +191,6 @@ public class MemberController {
 	public String signup(@ModelAttribute/*생략가능*/ Member inputMember,
 						@RequestParam("memberAddress") String[] memberAddress,
 						RedirectAttributes ra) {
-		
 		//log.debug("inputmember: " + inputMember);
 		
 		// 회원가입 서비스 호출
@@ -225,19 +226,19 @@ public class MemberController {
 		return service.selectMemberList();
 	}
 	
-//	// 회원 비밀번호 초기화(pass01!)(비동기)
-//	@ResponseBody
-//	@PutMapping("resetPw")
-//	public int resetPw(@RequestBody int inputNo) {
-//		return service.resetPw(inputNo);
-//	}
-//	
-//	// 회원 탈퇴 복구(비동기)
-//	@ResponseBody
-//	@PutMapping("restoreMember")
-//	public int restoreMember(@RequestBody int inputNo) {
-//		return service.restoreMember(inputNo);
-//	}
+	// 회원 비밀번호 초기화(pass01!)(비동기)
+	@ResponseBody
+	@PutMapping("resetPw")
+	public int resetPw(@RequestBody int inputNo) {
+		return service.resetPw(inputNo);
+	}
+	
+	// 회원 탈퇴 복구(비동기)
+	@ResponseBody
+	@PutMapping("restoreMember")
+	public int restoreMember(@RequestBody int inputNo) {
+		return service.restoreMember(inputNo);
+	}
 	
 	
 }

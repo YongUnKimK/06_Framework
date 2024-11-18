@@ -47,17 +47,17 @@ public interface MemberService {
 	 */
 	List<Member> selectMemberList();
 
-//	/** 비밀번호 초기화(비동기)
-//	 * @param inputNo
-//	 * @return
-//	 */
-//	int resetPw(int inputNo);
-//
-//	/** 탈퇴 회원 복구(비동기)
-//	 * @param inputNo
-//	 * @return
-//	 */
-//	int restoreMember(int inputNo);
+	/** 비밀번호 초기화(비동기)
+	 * @param inputNo
+	 * @return
+	 */
+	int resetPw(int inputNo);
+
+	/** 탈퇴 회원 복구(비동기)
+	 * @param inputNo
+	 * @return
+	 */
+	int restoreMember(int inputNo);
 
 
 	

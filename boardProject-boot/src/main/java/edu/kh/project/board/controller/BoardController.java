@@ -66,84 +66,76 @@ public class BoardController {
 	}
 	
 	// 상세 조회 요청 주소
-	// /board/1/2001?cp=1
-	// /board/2/1968?cp=2
-	
-	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
-	public String boardDetail(@PathVariable("boardCode") int boardCode,
-							  @PathVariable("boardNo") int boardNo,
-							  Model model,
-							  RedirectAttributes ra) {
+		// /board/1/2001?cp=1
+		// /board/2/1960?cp=2
 		
-		//게시글 상세 조회 서비스 호출
-		
-		// 1) Map으로 전달할 파라미터 묶기
-		
-		Map<String , Integer> map = new HashMap<>(); 
-		map.put("boardCode", boardCode);
-		map.put("boardNo", boardNo);
-		
-		// 2) 서비스 호출하기
-		Board board = service.selectOne(map);
-		
-		// log.debug("조회된 board : " + board ); 확인용
-		
-		String path = null;
-		
-		// 조회 결과가 없는 경우
-		if(board == null) {
-			path = "redirect:/board/" + boardCode; // 목록 재요청
-			ra.addFlashAttribute("messgae","게시글이 존재하지 않습니다");
+		@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
+		public String boardDetail(@PathVariable("boardCode") int boardCode,
+								@PathVariable("boardNo") int boardNo,
+								Model model,
+								RedirectAttributes ra ) {
 			
+			// 게시글 상세 조회 서비스 호출
 			
-		} else {
+			// 1) Map으로 전달할 파라미터 묶기
+			Map<String, Integer> map = new HashMap<>();
+			map.put("boardCode", boardCode);
+			map.put("boardNo", boardNo);
 			
-			//조회 결과가 있는 경우
-			path = "board/boardDetail"; // boardDetail.html로 forward
+			// 2) 서비스 호출
+			Board board = service.selectOne(map);
 			
-			// board - 게시글 일반 내용 + imageList + commentList
-			model.addAttribute("board", board);
+			//log.debug("조회된 board : " +  board);
 			
-			// 조회된 이미지 목록(imageList)가 있을 경우
-			if( !board.getImageList().isEmpty()) {
+			String path = null;
+			
+			// 조회 결과가 없는 경우
+			if(board == null) {
+				path = "redirect:/board/" + boardCode; // 목록 재요청
+				ra.addFlashAttribute("message", "게시글이 존재하지 않습니다");
+			
+			} else {
+				// 조회 결과가 있는 경우
+				path = "board/boardDetail"; // boardDetail.html 로  forward
 				
-				BoardImg thumbnail = null;
+				// board - 게시글 일반 내용 + imageList + commentList
+				model.addAttribute("board", board);
 				
-				// imageList의 0번 인덱스 == 가장 빠른 순서 (imgOrder) 
-				
-				// 만약 이미지 목록의 첫번째 행의 순서가 0 == 썸네일 인 경우				
-				if(board.getImageList().get(0).getImgOrder() == 0) {
+				// 조회된 이미지 목록(imageList)가 있을 경우
+				if( !board.getImageList().isEmpty() ) {
 					
-					thumbnail = board.getImageList().get(0);
+					BoardImg thumbnail = null;
+					
+					// imageList의 0번 인덱스 == 가장 빠른 순서 (imgOrder)
+					
+					// 만약 이미지 목록의 첫번째 행의 순서가 0 == 썸네일 인 경우
+					if(board.getImageList().get(0).getImgOrder() == 0) {
+						
+						thumbnail = board.getImageList().get(0); 
+					}
+					
+					model.addAttribute("thumbnail", thumbnail);
+					model.addAttribute("start", thumbnail != null ? 1 : 0);
 					
 				}
-				
-				model.addAttribute("thumbnail", thumbnail);
-				model.addAttribute("start", thumbnail != null ? 1: 0) ;
 				
 				
 			}
 			
 			
+		
+			return path;
 		}
-				
-		return path;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 }
 

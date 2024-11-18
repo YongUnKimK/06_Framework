@@ -55,7 +55,6 @@ FROM "MEMBER"
 ORDER BY MEMBER_NO
 </select>
 	
-<!--  비밀번호 초기화(비동기) 
 	<update id="resetPw">
 		UPDATE "MEMBER" SET
 		MEMBER_PW = #{encPw}
@@ -63,13 +62,11 @@ ORDER BY MEMBER_NO
 	</update>
 
 
-	 탈퇴 회원 복구(비동기) 
-	 
 	<update id="restoreMember">
 		UPDATE "MEMBER" SET
 		MEMBER_DEL_FL = 'N'
 		WHERE MEMBER_NO = #{inputNo}
-	</update> -->
+	</update>
 	
 	
 
