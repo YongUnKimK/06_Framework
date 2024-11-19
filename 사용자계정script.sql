@@ -16,16 +16,16 @@ ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 -- 11G 이전 문법 사용 허용
 
 
-CREATE USER boardProject IDENTIFIED BY board1234;
+CREATE USER semiProjectTeam3 IDENTIFIED BY KKOJJsemi123#@!;
 -- 계정 생성 구문 ( kh_cmh : ID / kh1234 : Password )
-GRANT CREATE SESSION TO boardProject;
+GRANT CREATE SESSION TO semiProjectTeam3;
 
-GRANT RESOURCE, CONNECT TO boardProject;
+GRANT RESOURCE, CONNECT TO semiProjectTeam3;
 -- 사용자 계정 권한 부여 설정
 -- RESOURCE : 테이블이나 인덱스 같은 DB 객체를 생성할 권한
 -- CONNECT : DB에 연결하고 로그인할 수 있는 권한
 
-ALTER USER boardProject DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
+ALTER USER semiProjectTeam3 DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 -- 객체가 생성될 수 있는 공간 할당량 무제한 지정
 
 

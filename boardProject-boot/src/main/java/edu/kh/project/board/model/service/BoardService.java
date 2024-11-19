@@ -26,6 +26,18 @@ public interface BoardService {
 	 */
 	Board selectOne(Map<String, Integer> map);
 
+	/** 좋아요 체크 해제
+	 * @param map
+	 * @return count
+ 	 */
+	int boardLike(Map<String, Integer> map);
+
+	/** 조회수 1 증가
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
+
 	
 
 }

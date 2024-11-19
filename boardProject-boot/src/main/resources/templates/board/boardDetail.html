@@ -148,6 +148,7 @@
 
     <script th:inline="javascript">
 
+        // ? :  안전 탐색 연산자 ( 얻어오는값이 null일경우 접근x)
         // - loginMember가 null 인 경우 null 반환
         const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
 

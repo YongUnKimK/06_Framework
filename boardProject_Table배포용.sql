@@ -629,9 +629,13 @@ ORDER SIBLINGS BY COMMENT_NO; -- SIBLINGS : 형제 / 자매 (같은레벨) 끼�
 
 /* 좋아요 테이블(BOARD_LIKE) 샘플 데이터 추가 */
 INSERT INTO "BOARD_LIKE"
-VALUES(1, 1998); -- 1번 회원이 1998번 글에 좋아요를 클릭함
+VALUES(4, 2000); -- 4번 회원이 1998번 글에 좋아요를 클릭함
 
 COMMIT;
+
+-- 좋아요 여부 확인
+SELECT  COUNT(*) FROM "BOARD_LIKE"
+WHERE MEMBER_NO = 
 
 ----------------------------------------------------------
 
@@ -639,11 +643,11 @@ COMMIT;
 
 INSERT INTO "BOARD_IMG" 
 ( 
-	SELECT NEXT_IMG_NO(), '경로1', '원본1', '변경1', 1, 2001 FROM DUAL
+	SELECT NEXT_IMG_NO(), '경로1', '원본1', '변경1', 1, 2000 FROM DUAL
 	UNION
-	SELECT NEXT_IMG_NO(), '경로2', '원본2', '변경2', 2, 2001 FROM DUAL
+	SELECT NEXT_IMG_NO(), '경로2', '원본2', '변경2', 1, 2000 FROM DUAL
 	UNION
-	SELECT NEXT_IMG_NO(), '경로3', '원본3', '변경3', 3, 2001 FROM DUAL
+	SELECT NEXT_IMG_NO(), '경로3', '원본3', '변경3', 1, 2000 FROM DUAL
 );
 
 SELECT * FROM "BOARD_IMG";
