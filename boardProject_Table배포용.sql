@@ -635,10 +635,10 @@ COMMIT;
 
 -- 좋아요 여부 확인
 SELECT  COUNT(*) FROM "BOARD_LIKE"
-WHERE MEMBER_NO = 
+WHERE MEMBER_NO = ;
 
 ----------------------------------------------------------
-
+SELECT * FROM MEMBER;
 -- 여러 행 INSERT 테스트
 
 INSERT INTO "BOARD_IMG" 
@@ -670,7 +670,7 @@ BEGIN
 END;
 -- 여기까지 긁기
 
-
+SELECT * FROM "COMMENT";
 
 
 

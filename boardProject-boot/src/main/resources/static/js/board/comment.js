@@ -33,6 +33,7 @@ const selectCommentList = () => {
   fetch("/comment?boardNo=" + boardNo) // GET 방식 요청
   .then(response => response.json())
   .then(commentList => {
+    
     console.log(commentList);
 
     // 화면에 존재하는 기존 댓글 목록 삭제 후
@@ -162,7 +163,7 @@ const selectCommentList = () => {
 
 
 
-//selectCommentList();
+selectCommentList();
 
 // -----------------------------------------------------------------------
 
@@ -305,9 +306,9 @@ const insertChildComment = (parentCommentNo, btn) => {
     "commentContent" : textarea.value,
     "boardNo"        : boardNo,
     "memberNo"       : loginMemberNo,  // 또는 Session 회원 번호 이용도 가능
-    "parentCommentNo" : parentCommentNo // 부모 댓글 번호
+    "parentCommentNo": parentCommentNo // 부모 댓글 번호
   };
-
+  //?
   fetch("/comment", {
     method : "POST",
     headers : {"Content-Type" : "application/json"},

@@ -19,8 +19,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("member")
 public class MemberController {
 	
-	@Autowired
-	private MemberService service;
+	
+	private final MemberService service;
 	
 	@ResponseBody
 	@GetMapping("selectAllList")
