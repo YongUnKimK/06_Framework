@@ -15,5 +15,13 @@ public interface EditBoardService {
 	 */
 	int boardInsert(Board inputBoard, List<MultipartFile> images) throws Exception;
 
+	/** 게시글 수정
+	 * @param inputBoard
+	 * @param images
+	 * @param deleteOrderList
+	 * @return result
+	 */
+	int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrderList) throws Exception;
+
 	
 }

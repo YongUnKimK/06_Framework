@@ -21,6 +21,7 @@ public class BoardServiceImpl implements BoardService {
 
 	private final BoardMapper mapper;
 
+	
 
 	// 특정 게시판 지정된 페이지 목록 조회
 	@Override
@@ -49,13 +50,13 @@ public class BoardServiceImpl implements BoardService {
 		
 		return map;
 	}
-	
 	// 게시판 종류 조회.
 	@Override
 	public List<Map<String, Object>> selectBoardTypeList() {
 		
 		
 		return mapper.selectBoardTypeList(); 
+	
 	}
 
 	//게시글 상세 조회
