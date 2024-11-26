@@ -75,6 +75,12 @@ public class CommentController {
 		return service.delete(commentNo);
 	}
 	
+	
+	 
+	/** 댓글 수정하는 메서드
+	 * @param comment
+	 * @return
+	 */
 	@PutMapping("")
 	public int update(@RequestBody Comment comment) {
 		

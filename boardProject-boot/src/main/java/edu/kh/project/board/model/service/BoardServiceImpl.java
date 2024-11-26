@@ -45,8 +45,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
 		
-		// 5. 결과 반환
-		
+		// 5. 결과 반환		
 		
 		return map;
 	}
@@ -119,6 +118,40 @@ public class BoardServiceImpl implements BoardService {
 			
 		return -1;
 	}
-
 	
+	// 검색 서비스 ( 게시글 목록 조회 참고 )
+	@Override
+	public Map<String, Object> searchList(Map<String, Object> paramMap, int cp) {
+		
+		// paramMap ( key, query, boardCode )
+		// 1. 지정된 게시판에서 검색 조건에 맞으면서 삭제되지 않은 게시글 수를 조회
+		int listCount = mapper.getSearchCount(paramMap);
+		
+		Pagination pagination = new Pagination(cp, listCount);
+				
+	
+		int limit = pagination.getLimit() ; //  10개
+		int offset = (cp - 1 ) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		List<Board> boardList = mapper.selectSearchList(paramMap, rowBounds);
+		
+		// 4. 목록 조회 결과 + Pagination 객체를 Map으로 묵음
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		// 5. 결과 반환		
+		
+		return map;
+		
+	}
+	
+	// DB 이미지 파일명 목록 조회
+	@Override
+	public List<String> selectDbImageList() {
+		
+		return mapper.selectDbImageList();
+	}
 }
