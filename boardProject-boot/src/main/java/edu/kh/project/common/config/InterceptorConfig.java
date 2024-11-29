@@ -16,7 +16,6 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	
 	// 인터셉터 클래스 Bean 등록
 	@Bean // 개발자가 만들어서 반환하는 객체를 Bean으로 등록 -> 관리는 Spring Container가 수행
-	
 	public BoardTypeInterceptor boardTypeInterceptor() {
 		return new BoardTypeInterceptor();
 	}

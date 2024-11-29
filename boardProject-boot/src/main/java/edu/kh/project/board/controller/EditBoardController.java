@@ -126,9 +126,6 @@ public class EditBoardController {
 	 */
 	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/update")
 	public String boardUpdate(@PathVariable("boardCode") int boardCode,
-
-
-
 							  @PathVariable("boardNo") int boardNo,
 							  @SessionAttribute("loginMember") Member loginMember,
 							  RedirectAttributes ra,

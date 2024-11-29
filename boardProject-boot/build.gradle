@@ -40,7 +40,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'	
+	//spring aop 쓸때 필요
+	implementation 'org.springframework.boot:spring-boot-starter-aop:3.3.5'	
 }
 
 tasks.named('test') {

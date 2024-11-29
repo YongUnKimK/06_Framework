@@ -14,9 +14,8 @@ import edu.kh.project.member.model.mapper.MemberMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Service // 비즈니스 + Bean등록
-@Transactional // 트랜잭션 처리 (기본 - rollbackFor=RuntimeException.class )
+//@Transactional // 트랜잭션 처리 (기본 - rollbackFor=RuntimeException.class )
 @Slf4j
-
 public class MemberServiceImpl implements MemberService {
 
 	// 등록된 Bean 중에서 같은 타입 or 상속관계인 Bean
@@ -119,25 +118,27 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.signup(inputMember);
 	}
 
+	// 회원조회 ( 비동기 ) 
 	@Override
+	@Transactional
 	public List<Member> selectMemberList() {
 		
 		return mapper.selectMemberList();
 	}
 	
 	// 비밀번호 초기화(비동기)
-		@Override
-		public int resetPw(int inputNo) {
+	@Override
+	public int resetPw(int inputNo) {
 
-			// pass01! -> 암호화
-			String encPw = bcrypt.encode("pass01!");
+		// pass01! -> 암호화
+		String encPw = bcrypt.encode("pass01!");
 
-			Map<String, Object> map = new HashMap<>();
-			map.put("inputNo", inputNo);
-			map.put("encPw", encPw);
+		Map<String, Object> map = new HashMap<>();
+		map.put("inputNo", inputNo);
+		map.put("encPw", encPw);
 
-			return mapper.resetPw(map);
-		}
+		return mapper.resetPw(map);
+	}
 
 		// 탈퇴 회원 복구(비동기)
 		@Override
