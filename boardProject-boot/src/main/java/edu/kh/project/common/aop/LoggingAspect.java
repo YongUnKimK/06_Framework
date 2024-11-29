@@ -2,7 +2,6 @@ package edu.kh.project.common.aop;
 
 import java.util.Arrays;
 
-import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -17,15 +16,15 @@ import edu.kh.project.member.model.dto.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
+@Component
 @Aspect
 @Slf4j
-@Component
 public class LoggingAspect {
 
 	/** 컨트롤러 수행 전 로그 출력( 클래스 / 메서드 / ip )
 	 * @param jp
 	 */
-	@Before("PointCutBundle.controllerPointCut()")
+	@Before("PointcutBundle.controllerPointCut()")
 	public void beforeController(JoinPoint jp) {
 		
 		// AOP가 적용된 클래스 이름 얻어오기
@@ -45,7 +44,7 @@ public class LoggingAspect {
 				
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(String.format("[%s.%s] 요청 /  ip / %s" , className, methodName, ip));
+		sb.append(String.format("[%s.%s] 요청 / ip / %s", className, methodName, ip));
 		
 		// 로그인 상태인 경우
 		if(req.getSession().getAttribute("loginMember") != null) {
@@ -64,9 +63,9 @@ public class LoggingAspect {
 	 * @throws Throwable 
 	 */
 	
-	@Around("PointCutBundle.serviceImplPointCut()")
+	@Around("PointcutBundle.serviceImplPointCut()")
 	public Object aroundServiceImpl( ProceedingJoinPoint pjp) throws Throwable {
-		// Throwalbe - 예외 처리의 최상위 클래스
+		// Throwable - 예외 처리의 최상위 클래스
 		// Throwable 주요 자식으로 Exception ( 예외 ) / Eroor ( 오류 ) 
 		// 예외 : 개발자가 처리할 수 있는 문제 
 		// 오류 : 시스템 레벨의 심각한 문제 -> 개발자가 다룰 수 없다..
@@ -93,7 +92,7 @@ public class LoggingAspect {
 		log.info("=============================== {}. {} 서비스 호출 ================" , className, methodName);
 		
 		// 파라미터를 로그로 출력
-		log.info("Parameter: {}", Arrays.toString(pjp.getArgs()));
+		log.info("Parameter : {}", Arrays.toString(pjp.getArgs()));
 		
 		// 서비스 코드 실행 시 시간 기록
 		long startMs = System.currentTimeMillis(); // 현재 시간을 ms 단위로 반환
@@ -116,8 +115,7 @@ public class LoggingAspect {
 	
 	// @AfterThrowing : 메서드가 예외를 던진 후에 실행되는 advice를 정의
 	
-	@AfterThrowing(pointcut="@annotation(org.springframework.transaction.annotaion.Transactional)",
-					throwing = "ex")	
+	@AfterThrowing(pointcut="@annotation(org.springframework.transaction.annotation.Transactional)",	throwing = "ex")	
 	public void transactionRollback(JoinPoint jp ,Throwable ex) {
 		
 		log.info("**** 트랜잭션이 롤백됨~~ {} ****", jp.getSignature().getName());
