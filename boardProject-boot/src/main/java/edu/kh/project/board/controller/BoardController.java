@@ -55,9 +55,9 @@ public class BoardController {
 
 	@GetMapping("{boardCode:[0-9]+}")
 	public String selectBoardList(@PathVariable("boardCode") int boardCode,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			Model model,
-			@RequestParam Map<String, Object> paramMap) {
+								@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+								Model model,
+								@RequestParam Map<String, Object> paramMap) {
 
 		// 조회 서비스 호출 후 결과 반환
 		Map<String, Object> map = null;
@@ -95,11 +95,11 @@ public class BoardController {
 
 	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
 	public String boardDetail(@PathVariable("boardCode") int boardCode,
-			@PathVariable("boardNo") int boardNo,
-			Model model, RedirectAttributes ra,
-			@SessionAttribute(value = "loginMember", required = false) Member loginMember
-			, HttpServletRequest req, // 요청에													
-			HttpServletResponse resp // 새로운 쿠키 만들어서 응답하기
+							@PathVariable("boardNo") int boardNo,
+							Model model, RedirectAttributes ra,
+							@SessionAttribute(value = "loginMember", required = false) Member loginMember,
+							HttpServletRequest req, // 요청에													
+							HttpServletResponse resp // 새로운 쿠키 만들어서 응답하기
 	) {
 
 		// 게시글 상세 조회 서비스 호출
