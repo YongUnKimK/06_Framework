@@ -94,9 +94,11 @@ public class BoardController {
 	// /board/2/1960?cp=2
 
 	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
-	public String boardDetail(@PathVariable("boardCode") int boardCode,
+	public String boardDetail(
+							@PathVariable("boardCode") int boardCode,
 							@PathVariable("boardNo") int boardNo,
-							Model model, RedirectAttributes ra,
+							Model model, 
+							RedirectAttributes ra,
 							@SessionAttribute(value = "loginMember", required = false) Member loginMember,
 							HttpServletRequest req, // 요청에													
 							HttpServletResponse resp // 새로운 쿠키 만들어서 응답하기

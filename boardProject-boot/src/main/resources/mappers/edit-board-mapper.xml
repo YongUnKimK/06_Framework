@@ -60,8 +60,13 @@
 	<foreach collection="list" item="img" 
 	open="(" close=")" separator=" UNION ">
 	
-	SELECT NEXT_IMG_NO(), #{img.imgPath}, #{img.imgOriginalName}, 
-	#{img.imgRename}, #{img.imgOrder}, #{img.boardNo}
+	SELECT 
+	NEXT_IMG_NO(),
+	 #{img.imgPath},
+	 #{img.imgOriginalName}, 
+	 #{img.imgRename},
+	 #{img.imgOrder}, 
+	 #{img.boardNo}
 	FROM DUAL 
 	
 	</foreach>
@@ -121,18 +126,5 @@
 	</update>
 
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </mapper>

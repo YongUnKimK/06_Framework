@@ -17,11 +17,13 @@ import edu.kh.project.board.model.dto.BoardImg;
 import edu.kh.project.board.model.mapper.EditBoardMapper;
 import edu.kh.project.common.util.Utility;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
 @RequiredArgsConstructor
 @PropertySource("classpath:/config.properties")
+@Slf4j
 public class EditBoardServiceImpl implements EditBoardService {
 
 	private final EditBoardMapper mapper;
@@ -90,7 +92,7 @@ public class EditBoardServiceImpl implements EditBoardService {
 				
 				// 해당 BoardImg를 uploadList 추가
 				uploadList.add(img);
-								
+				log.debug("이미지파일보이니?" +img);				
 			}
 			
 		}
